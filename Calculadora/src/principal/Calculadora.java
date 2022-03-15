@@ -2,6 +2,12 @@ package principal;
 import menu.Menu;
 import operaciones.Operaciones;
 
+/**
+ * 
+ * @author Jokin Cadiñanos
+ *
+ */
+
 public class Calculadora{
     public static void main(String[] args) {   
         int resultado = 0;
@@ -14,6 +20,8 @@ public class Calculadora{
         do{
             operandos = menu.pedirNumeros();
             operacion = menu.menuOpciones();
+            
+            try {
             
             if (operacion.equalsIgnoreCase("+")){
                 resultado = operaciones.sumar(operandos[0], operandos[1]);
@@ -33,6 +41,10 @@ public class Calculadora{
             } else {
                 System.out.println ("Operación no válida");
             }
+        }catch (ArithmeticException e) {
+        	System.out.println("Operaciones aritmeticas no validas " + e.getMessage());
+        }
+            
         }   while (menu.repetir());
     }
 }
