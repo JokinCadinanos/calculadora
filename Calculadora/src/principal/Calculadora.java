@@ -1,4 +1,10 @@
 package principal;
+import java.io.IOException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+
 import menu.Menu;
 import operaciones.Operaciones;
 
@@ -9,6 +15,8 @@ import operaciones.Operaciones;
  */
 
 public class Calculadora{
+    private static final Logger LOGGER = Logger.getLogger(Calculadora.class.getName());
+
     public static void main(String[] args) {   
         int resultado = 0;
         String operacion = "";
@@ -16,6 +24,16 @@ public class Calculadora{
         
         Menu menu = new Menu();
         Operaciones operaciones = new Operaciones();
+        
+        
+        Handler fileHandler  = null;
+        Handler cosoleHandler = new ConsoleHandler();
+        
+        try {
+        	fileHandler = new FileHandler("./logs/operaciones.log");
+        }catch (IOException e) {
+        	
+        }
         
         do{
             operandos = menu.pedirNumeros();
@@ -43,6 +61,7 @@ public class Calculadora{
             }
         }catch (ArithmeticException e) {
         	System.out.println("Operaciones aritmeticas no validas " + e.getMessage());
+        	
         }
             
         }   while (menu.repetir());
